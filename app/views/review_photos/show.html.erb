@@ -1,0 +1,65 @@
+<div class="page-header">
+  <h3>Review Photo #<%= @review_photo.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Link</dt>
+      <dd><%= @review_photo.link %></dd>
+
+      <dt>Review</dt>
+      <dd>
+        <% if @review_photo.review.present? %>
+          <a href="/reviews/<%= @review_photo.review_id %>">
+            <%= @review_photo.review.user_id %>
+          </a>
+        <% end %>
+      </dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/review_photos" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/review_photos/<%= @review_photo.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_review_photo/<%= @review_photo.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- A Review photo has many restaurant -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Restaurant
+      </li>
+
+      <% @review_photo.restaurant.each do |restaurant| %>
+        <li class="list-group-item">
+          <a href="/restaurants/<%= restaurant.id %>">
+            <%= restaurant.created_at %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/restaurants/<%= restaurant.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/restaurants/<%= restaurant.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_restaurant/<%= restaurant.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
